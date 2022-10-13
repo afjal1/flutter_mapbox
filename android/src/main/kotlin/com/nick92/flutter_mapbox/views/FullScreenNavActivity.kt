@@ -344,6 +344,7 @@ class FullscreenNavActivity : AppCompatActivity() {
                     routerOrigin: RouterOrigin
                 ) {
                     setRouteAndStartNavigation(routes)
+                    
                 }
 
                 override fun onFailure(

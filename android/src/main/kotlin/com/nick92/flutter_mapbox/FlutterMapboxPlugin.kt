@@ -184,6 +184,7 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   private fun beginNavigation(wayPoints: List<Point>) {
+
     currentActivity?.let { FullscreenNavigationLauncher.startNavigation(it, wayPoints) }
   }
 
@@ -193,6 +194,22 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   override fun onCancel(args: Any?) {
+    val builder = AlertDialog.Builder(this@MainActivity)
+    builder.setMessage("Are you sure you want to Delete?")
+        .setCancelable(false)
+        .setPositiveButton("Yes") { dialog, id ->
+            // Delete selected note from database
+            var dbManager = DbManager(this.context!!)
+            val selectionArgs = arrayOf(myNote.nodeID.toString())
+            dbManager.delete("ID=?", selectionArgs)
+            LoadQuery("%")
+        }
+        .setNegativeButton("No") { dialog, id ->
+            // Dismiss the dialog
+            dialog.dismiss()
+        }
+    val alert = builder.create()
+    alert.show()
     eventSink = null;
   }
 
