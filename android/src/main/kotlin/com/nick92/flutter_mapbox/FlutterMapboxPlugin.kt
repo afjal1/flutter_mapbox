@@ -84,16 +84,7 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
       }
       "getDistanceRemaining" -> {
      
-AlertDialog.Builder(this)
-    .setTitle("Title")
-    .setMessage("Message")
-    .setPositiveButton("OK") { dialog, which ->
-     
-    }
-    .setNegativeButton("Cancel") { dialog, which ->
-        
-    }
-    .show()
+
 
         result.success(distanceRemaining);
       }
@@ -101,16 +92,7 @@ AlertDialog.Builder(this)
         result.success(durationRemaining);
       }
       "startNavigation" -> {
-        AlertDialog.Builder(this)
-    .setTitle("Title")
-    .setMessage("Message")
-    .setPositiveButton("OK") { dialog, which ->
-     
-    }
-    .setNegativeButton("Cancel") { dialog, which ->
         
-    }
-    .show()
         checkPermissionAndBeginNavigation(call, result)
       }
       "finishNavigation" -> {

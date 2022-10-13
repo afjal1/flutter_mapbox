@@ -265,7 +265,7 @@ class FullscreenNavActivity : AppCompatActivity() {
         mapboxNavigation.registerLocationObserver(locationObserver)
         mapboxNavigation.registerVoiceInstructionsObserver(voiceInstructionsObserver)
         mapboxNavigation.registerRouteProgressObserver(replayProgressObserver)
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(context:this)
     .setTitle("Title")
     .setMessage("Message")
     .setPositiveButton("OK") { dialog, which ->
