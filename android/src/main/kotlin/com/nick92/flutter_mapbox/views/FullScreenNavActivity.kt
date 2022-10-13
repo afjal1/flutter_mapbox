@@ -72,7 +72,7 @@ import com.nick92.flutter_mapbox.R
 import com.nick92.flutter_mapbox.databinding.MapActivityBinding
 import com.nick92.flutter_mapbox.utilities.PluginUtilities
 import java.util.*
-import android.app.AlertDialog.Builder
+
 
 
 class FullscreenNavActivity : AppCompatActivity() {
@@ -194,15 +194,20 @@ class FullscreenNavActivity : AppCompatActivity() {
                 )
                 .build()
           
+
+
+                Toast.makeText(
+                    this@FullscreenNavActivity,
+                    "I am Here For Testing",
+                    Toast.LENGTH_SHORT
+                ).show()
             if(distanceRemaining <=100){
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Destination Reached")
-                builder.setMessage("You have reached your destination")
-                builder.setPositiveButton("OK"){dialog, which ->
-                    dialog.dismiss()
-                }
-                val dialog: AlertDialog = builder.create()
-                dialog.show()
+                Toast.makeText(
+                    this@FullscreenNavActivity,
+                    "I am Here For The Distance",
+                    Toast.LENGTH_SHORT
+                ).show()
+              
             }
             
            
