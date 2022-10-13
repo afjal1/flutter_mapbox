@@ -25,6 +25,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformViewRegistry
 import java.util.*
+import android.support.v7.app.AlertDialog;
 
 /** FlutterMapboxPlugin */
 class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
@@ -92,7 +93,48 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
         checkPermissionAndBeginNavigation(call, result)
       }
       "finishNavigation" -> {
-        currentActivity?.let { FullscreenNavigationLauncher.stopNavigation(it) }
+        //confirmation dialog box
+
+      //   var builder = androidx.appcompat.app.AlertDialog.Builder(currentActivity)
+      //   builder.setTitle("Exit Navigation")
+      //   builder.setMessage("Are you sure you want to exit navigation?")
+      //   builder.setPositiveButton("Yes") { dialog, which ->
+      //     FullscreenNavigationLauncher.stopNavigation(currentActivity!!)
+      //     result.success(true)
+      //   }
+      //   builder.setNegativeButton("No") { dialog, which ->
+      //     result.success(false)
+      //   }
+      //   builder.show()
+      // }
+      val builder = AlertDialog.Builder(this)
+      //set title for alert dialog
+      builder.setTitle("Confirm")
+      //set message for alert dialog
+      builder.setMessage("Do you wish to continue?")
+      builder.setIcon(android.R.drawable.ic_dialog_alert)
+      
+      //performing positive action
+      builder.setPositiveButton("Yes"){dialogInterface, which ->
+          Toast.makeText(applicationContext,"clicked yes",Toast.LENGTH_LONG).show()
+      }
+      //performing cancel action
+      builder.setNeutralButton("Cancel"){dialogInterface , which ->
+          Toast.makeText(applicationContext,"clicked cancel\n operation cancel",Toast.LENGTH_LONG).show()
+      }
+      //performing negative action
+      builder.setNegativeButton("No"){dialogInterface, which ->
+          Toast.makeText(applicationContext,"clicked No",Toast.LENGTH_LONG).show()
+      }
+      // Create the AlertDialog
+      val alertDialog: AlertDialog = builder.create()
+      // Set other dialog properties
+      alertDialog.setCancelable(false)
+      alertDialog.show()
+
+
+
+      //  currentActivity?.let { FullscreenNavigationLauncher.stopNavigation(it) }
       }
       "enableOfflineRouting" -> {
         downloadRegionForOfflineRouting(call, result)
@@ -194,8 +236,7 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   override fun onCancel(args: Any?) {
-
-    // eventSink = null;
+    eventSink = null;
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
