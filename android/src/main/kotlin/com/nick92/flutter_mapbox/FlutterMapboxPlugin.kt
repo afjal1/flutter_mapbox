@@ -25,7 +25,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformViewRegistry
 import java.util.*
-import android.app.AlertDialog.Builder
+
 /** FlutterMapboxPlugin */
 class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
 
@@ -83,27 +83,12 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
         result.success("Android ${Build.VERSION.RELEASE}")
       }
       "getDistanceRemaining" -> {
-     
-
-
         result.success(distanceRemaining);
       }
       "getDurationRemaining" -> {
         result.success(durationRemaining);
       }
       "startNavigation" -> {
-
-        
-
-        Toast.makeText(
-          context,
-          "This is Testong",
-          Toast.LENGTH_SHORT
-      ).show()
-
-         
-      }
-        
         checkPermissionAndBeginNavigation(call, result)
       }
       "finishNavigation" -> {
