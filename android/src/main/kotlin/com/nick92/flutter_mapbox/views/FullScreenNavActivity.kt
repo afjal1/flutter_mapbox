@@ -199,14 +199,13 @@ class FullscreenNavActivity : AppCompatActivity() {
                     "I am Here For Testing",
                     Toast.LENGTH_SHORT
                 ).show()
-            if(distanceRemaining <=100){
-                Toast.makeText(
-                    this@FullscreenNavActivity,
-                    "I am Here For The Distance",
-                    Toast.LENGTH_SHORT
-                ).show()
-              
-            }
+            // if(distanceRemaining <=100){
+            //     Toast.makeText(
+            //         this@FullscreenNavActivity,
+            //         "I am Here For The Distance",
+            //         Toast.LENGTH_SHORT
+            //     ).show()
+            // }
             
            
 
