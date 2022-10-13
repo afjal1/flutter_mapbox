@@ -194,26 +194,8 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   override fun onCancel(args: Any?) {
-    val builder = AlertDialog.Builder(this)
-    builder.setTitle("Androidly Alert")
-    builder.setMessage("We have a message")
-    
-    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-        Toast.makeText(applicationContext,
-                "Yes", Toast.LENGTH_SHORT).show()
-    }
-            
-    builder.setNegativeButton(android.R.string.no) { dialog, which ->
-        Toast.makeText(applicationContext,
-               "No", Toast.LENGTH_SHORT).show()
-    }
-    
-    builder.setNeutralButton("Maybe") { dialog, which ->
-        Toast.makeText(applicationContext,
-                "Maybe", Toast.LENGTH_SHORT).show()
-    }
-    builder.show()
-   
+
+    // eventSink = null;
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
