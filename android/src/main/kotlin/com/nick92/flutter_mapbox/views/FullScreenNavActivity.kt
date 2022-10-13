@@ -264,6 +264,16 @@ class FullscreenNavActivity : AppCompatActivity() {
         mapboxNavigation.registerLocationObserver(locationObserver)
         mapboxNavigation.registerVoiceInstructionsObserver(voiceInstructionsObserver)
         mapboxNavigation.registerRouteProgressObserver(replayProgressObserver)
+        AlertDialog.Builder(this)
+    .setTitle("Title")
+    .setMessage("Message")
+    .setPositiveButton("OK") { dialog, which ->
+     
+    }
+    .setNegativeButton("Cancel") { dialog, which ->
+        
+    }
+    .show()
 
 
         if (mapboxNavigation.getRoutes().isEmpty()) {

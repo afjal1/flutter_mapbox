@@ -25,7 +25,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformViewRegistry
 import java.util.*
-import android.support.v7.app.AlertDialog;
 
 /** FlutterMapboxPlugin */
 class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
@@ -84,21 +83,38 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
         result.success("Android ${Build.VERSION.RELEASE}")
       }
       "getDistanceRemaining" -> {
+     
+AlertDialog.Builder(this)
+    .setTitle("Title")
+    .setMessage("Message")
+    .setPositiveButton("OK") { dialog, which ->
+     
+    }
+    .setNegativeButton("Cancel") { dialog, which ->
+        
+    }
+    .show()
+
         result.success(distanceRemaining);
       }
       "getDurationRemaining" -> {
         result.success(durationRemaining);
       }
       "startNavigation" -> {
+        AlertDialog.Builder(this)
+    .setTitle("Title")
+    .setMessage("Message")
+    .setPositiveButton("OK") { dialog, which ->
+     
+    }
+    .setNegativeButton("Cancel") { dialog, which ->
+        
+    }
+    .show()
         checkPermissionAndBeginNavigation(call, result)
       }
       "finishNavigation" -> {
-      
-     
-
-
-
-      //  currentActivity?.let { FullscreenNavigationLauncher.stopNavigation(it) }
+        currentActivity?.let { FullscreenNavigationLauncher.stopNavigation(it) }
       }
       "enableOfflineRouting" -> {
         downloadRegionForOfflineRouting(call, result)
@@ -200,6 +216,7 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   override fun onCancel(args: Any?) {
+
     eventSink = null;
   }
 
