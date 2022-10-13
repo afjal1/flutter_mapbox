@@ -194,23 +194,27 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   override fun onCancel(args: Any?) {
-    val builder = AlertDialog.Builder(this@MainActivity)
-    builder.setMessage("Are you sure you want to Delete?")
-        .setCancelable(false)
-        .setPositiveButton("Yes") { dialog, id ->
-            // Delete selected note from database
-            var dbManager = DbManager(this.context!!)
-            val selectionArgs = arrayOf(myNote.nodeID.toString())
-            dbManager.delete("ID=?", selectionArgs)
-            LoadQuery("%")
-        }
-        .setNegativeButton("No") { dialog, id ->
-            // Dismiss the dialog
-            dialog.dismiss()
-        }
-    val alert = builder.create()
-    alert.show()
-    eventSink = null;
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle("Androidly Alert")
+    builder.setMessage("We have a message")
+    //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+    
+    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+        Toast.makeText(applicationContext,
+                "Yes", Toast.LENGTH_SHORT).show()
+    }
+            
+    builder.setNegativeButton(android.R.string.no) { dialog, which ->
+        Toast.makeText(applicationContext,
+               "No", Toast.LENGTH_SHORT).show()
+    }
+    
+    builder.setNeutralButton("Maybe") { dialog, which ->
+        Toast.makeText(applicationContext,
+                "Maybe", Toast.LENGTH_SHORT).show()
+    }
+    builder.show()
+   
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
