@@ -72,7 +72,6 @@ import com.nick92.flutter_mapbox.R
 import com.nick92.flutter_mapbox.databinding.MapActivityBinding
 import com.nick92.flutter_mapbox.utilities.PluginUtilities
 import java.util.*
-import android.app.AlertDialog.Builder
 
 class FullscreenNavActivity : AppCompatActivity() {
 
@@ -265,16 +264,7 @@ class FullscreenNavActivity : AppCompatActivity() {
         mapboxNavigation.registerLocationObserver(locationObserver)
         mapboxNavigation.registerVoiceInstructionsObserver(voiceInstructionsObserver)
         mapboxNavigation.registerRouteProgressObserver(replayProgressObserver)
-        AlertDialog.Builder(context:this)
-    .setTitle("Title")
-    .setMessage("Message")
-    .setPositiveButton("OK") { dialog, which ->
      
-    }
-    .setNegativeButton("Cancel") { dialog, which ->
-        
-    }
-    .show()
 
 
         if (mapboxNavigation.getRoutes().isEmpty()) {
