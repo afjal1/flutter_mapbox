@@ -12,9 +12,8 @@ import 'models/models.dart';
 class MapBoxNavigation {
   factory MapBoxNavigation({ValueSetter<RouteEvent>? onRouteEvent}) {
     if (_instance == null) {
-      final MethodChannel methodChannel = const MethodChannel('flutter_mapbox');
-      final EventChannel eventChannel =
-          const EventChannel('flutter_mapbox/events');
+      const MethodChannel methodChannel = MethodChannel('flutter_mapbox');
+      const EventChannel eventChannel = EventChannel('flutter_mapbox/events');
       _instance =
           MapBoxNavigation.private(methodChannel, eventChannel, onRouteEvent);
     }
@@ -87,8 +86,7 @@ class MapBoxNavigation {
       pointList.add(pointMap);
     }
     var i = 0;
-    var wayPointMap =
-        Map.fromIterable(pointList, key: (e) => i++, value: (e) => e);
+    var wayPointMap = {for (var e in pointList) i++: e};
 
     var args = options.toMap();
     args["wayPoints"] = wayPointMap;
@@ -119,20 +117,20 @@ class MapBoxNavigation {
     if (_routeEventNotifier != null) _routeEventNotifier!(event);
 
     if (event.eventType == MapBoxEvent.on_arrival) {
-      if (currentLegIndex >= legsCount - 1)
+      if (currentLegIndex >= legsCount - 1) {
         _routeEventSubscription.cancel();
-      else
+      } else {
         currentLegIndex++;
-    } else if (event.eventType == MapBoxEvent.navigation_finished)
+      }
+    } else if (event.eventType == MapBoxEvent.navigation_finished) {
       _routeEventSubscription.cancel();
+    }
   }
 
   Stream<RouteEvent>? get _streamRouteEvent {
-    if (_onRouteEvent == null) {
-      _onRouteEvent = _routeEventchannel
-          .receiveBroadcastStream()
-          .map((dynamic event) => _parseRouteEvent(event));
-    }
+    _onRouteEvent ??= _routeEventchannel
+        .receiveBroadcastStream()
+        .map((dynamic event) => _parseRouteEvent(event));
     return _onRouteEvent;
   }
 
@@ -143,8 +141,9 @@ class MapBoxNavigation {
     if (progressEvent.isProgressEvent!) {
       event = RouteEvent(
           eventType: MapBoxEvent.progress_change, data: progressEvent);
-    } else
+    } else {
       event = RouteEvent.fromJson(map);
+    }
     return event;
   }
 }

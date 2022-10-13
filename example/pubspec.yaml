@@ -19,6 +19,7 @@ dependencies:
     sdk: flutter
 
   flutter_mapbox:
+   
     # When depending on this package from a real application you should use:
     #   flutter_mapbox: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints

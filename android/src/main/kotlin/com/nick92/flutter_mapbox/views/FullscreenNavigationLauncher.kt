@@ -6,6 +6,7 @@ import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.geojson.Point
 import com.mapbox.navigation.base.route.NavigationRoute
 import java.io.Serializable
+import android.widget.Toast
 
 open class FullscreenNavigationLauncher {
     companion object {
@@ -13,6 +14,8 @@ open class FullscreenNavigationLauncher {
 
         fun startNavigation(activity: Activity, wayPoints: List<Point?>?) {
             val navigationIntent = Intent(activity, FullscreenNavActivity::class.java)
+
+
             navigationIntent.putExtra("waypoints", wayPoints as Serializable?)
             activity.startActivity(navigationIntent)
         }

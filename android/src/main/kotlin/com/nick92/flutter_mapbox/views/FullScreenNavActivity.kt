@@ -72,6 +72,7 @@ import com.nick92.flutter_mapbox.R
 import com.nick92.flutter_mapbox.databinding.MapActivityBinding
 import com.nick92.flutter_mapbox.utilities.PluginUtilities
 import java.util.*
+import android.app.AlertDialog
 
 
 
@@ -81,6 +82,7 @@ class FullscreenNavActivity : AppCompatActivity() {
     private var points: MutableList<Point> = mutableListOf()
     private var canResetRoute: Boolean = false
     private var accessToken: String? = null
+    private var firstTime: Boolean =true
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +90,8 @@ class FullscreenNavActivity : AppCompatActivity() {
         setTheme(R.style.Theme_AppCompat_NoActionBar)
         binding = MapActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+      
+
         accessToken = PluginUtilities.getResourceFromContext(this.applicationContext, "mapbox_access_token")
         mapboxMap = binding.mapView.getMapboxMap()
 
@@ -193,27 +197,10 @@ class FullscreenNavActivity : AppCompatActivity() {
                     EstimatedTimeToArrivalFormatter(this, TimeFormat.NONE_SPECIFIED)
                 )
                 .build()
-               
-                 print("THis is Our Distance Here ${TripProgressUpdateFormatter.Builder(this)
-                 .distanceRemainingFormatter(
-                     DistanceRemainingFormatter(distanceFormatterOptions)
-                 )
-                 .timeRemainingFormatter(
-                     TimeRemainingFormatter(this)
-                 )
-                 .percentRouteTraveledFormatter(
-                     PercentDistanceTraveledFormatter()
-                 )
-                 .estimatedTimeToArrivalFormatter(
-                     EstimatedTimeToArrivalFormatter(this, TimeFormat.NONE_SPECIFIED)
-                 )
-                 .build()
-                }"
-                )
+
 
                
-      
-           
+            
 
         )
 
@@ -479,14 +466,14 @@ class FullscreenNavActivity : AppCompatActivity() {
     }
 
     private fun startSimulation(route: DirectionsRoute) {
-        mapboxReplayer.run {
-            stop()
-            clearEvents()
-            val replayEvents = ReplayRouteMapper().mapDirectionsRouteGeometry(route)
-            pushEvents(replayEvents)
-            seekTo(replayEvents.first())
-            play()
-        }
+//        mapboxReplayer.run {
+//            stop()
+//            clearEvents()
+//            val replayEvents = ReplayRouteMapper().mapDirectionsRouteGeometry(route)
+//            pushEvents(replayEvents)
+//            seekTo(replayEvents.first())
+//            play()
+//        }
     }
 
     //Instance Properties
@@ -730,6 +717,7 @@ class FullscreenNavActivity : AppCompatActivity() {
         viewportDataSource.onRouteProgressChanged(routeProgress)
         viewportDataSource.evaluate()
 
+
         // draw the upcoming maneuver arrow on the map
         val style = mapboxMap.getStyle()
         if (style != null) {
@@ -763,6 +751,27 @@ class FullscreenNavActivity : AppCompatActivity() {
         binding.tripProgressView.render(
             tripProgressApi.getTripProgress(routeProgress)
         )
+
+
+
+
+
+
+       if(routeProgress.distanceRemaining <= 100.000 && firstTime){
+           firstTime =false
+           val builder = AlertDialog.Builder(this)
+           builder.setTitle("Arrived at Destination")
+           builder.setMessage("Click Here to Start with GTL Video Guide")
+              builder.setPositiveButton("Okay"){dialog, which ->
+                dialog.dismiss()
+                clearRouteAndStopNavigation()
+              }
+           val alertDialog: AlertDialog = builder.create()
+           alertDialog.setCancelable(false)
+           alertDialog.show()
+       }
+
+
     }
 
     /**

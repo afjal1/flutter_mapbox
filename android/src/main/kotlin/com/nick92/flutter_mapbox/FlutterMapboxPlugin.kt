@@ -8,12 +8,11 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.NonNull
 import com.nick92.flutter_mapbox.views.EmbeddedViewFactory
-
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.geojson.Point
 import com.nick92.flutter_mapbox.views.FullscreenNavigationLauncher
-
+import android.widget.Toast
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -25,6 +24,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformViewRegistry
 import java.util.*
+import android.app.AlertDialog
+
 
 /** FlutterMapboxPlugin */
 class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
@@ -172,7 +173,7 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       val haspermission = currentActivity?.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
       if(haspermission != PackageManager.PERMISSION_GRANTED) {
-        //_activity.onRequestPermissionsResult((a,b,c) => onRequestPermissionsResult)
+
         currentActivity?.requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_CODE)
         beginNavigation(wayPoints)
       }
@@ -184,17 +185,20 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   private fun beginNavigation(wayPoints: List<Point>) {
-
-    currentActivity?.let { FullscreenNavigationLauncher.startNavigation(it, wayPoints) }
+       currentActivity?.let { FullscreenNavigationLauncher.startNavigation(it, wayPoints) }
   }
+
 
 
   override fun onListen(args: Any?, events: EventChannel.EventSink?) {
     eventSink = events;
+
+   
+
+      
   }
 
   override fun onCancel(args: Any?) {
-
     eventSink = null;
   }
 
