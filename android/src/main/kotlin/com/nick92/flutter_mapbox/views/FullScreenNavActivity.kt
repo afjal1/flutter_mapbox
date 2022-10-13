@@ -193,9 +193,7 @@ class FullscreenNavActivity : AppCompatActivity() {
                     EstimatedTimeToArrivalFormatter(this, TimeFormat.NONE_SPECIFIED)
                 )
                 .build()
-          
-
-
+               
                 Toast.makeText(
                     this@FullscreenNavActivity,
                     "I am Here For Testing",
