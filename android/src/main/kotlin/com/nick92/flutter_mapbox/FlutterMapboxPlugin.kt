@@ -184,7 +184,6 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   private fun beginNavigation(wayPoints: List<Point>) {
-
     currentActivity?.let { FullscreenNavigationLauncher.startNavigation(it, wayPoints) }
   }
 
@@ -194,7 +193,6 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
   }
 
   override fun onCancel(args: Any?) {
-
     eventSink = null;
   }
 

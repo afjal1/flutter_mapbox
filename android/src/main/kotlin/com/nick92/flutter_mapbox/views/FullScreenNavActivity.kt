@@ -73,6 +73,7 @@ import com.nick92.flutter_mapbox.databinding.MapActivityBinding
 import com.nick92.flutter_mapbox.utilities.PluginUtilities
 import java.util.*
 
+
 class FullscreenNavActivity : AppCompatActivity() {
 
     var receiver: BroadcastReceiver? = null
@@ -191,6 +192,20 @@ class FullscreenNavActivity : AppCompatActivity() {
                     EstimatedTimeToArrivalFormatter(this, TimeFormat.NONE_SPECIFIED)
                 )
                 .build()
+          
+            if(distanceRemaining <=100){
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Destination Reached")
+                builder.setMessage("You have reached your destination")
+                builder.setPositiveButton("OK"){dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+            }
+            
+           
+
         )
 
         // initialize voice instructions api and the voice instruction player
@@ -283,13 +298,11 @@ class FullscreenNavActivity : AppCompatActivity() {
 
         }
 
-
         findRoute(origin = points[0], destination = points[1])
     }
 
     override fun onStop() {
         super.onStop()
-
         // unregister event listeners to prevent leaks or unnecessary resource consumption
         mapboxNavigation.unregisterRoutesObserver(routesObserver)
         mapboxNavigation.unregisterRouteProgressObserver(routeProgressObserver)
