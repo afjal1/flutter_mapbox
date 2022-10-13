@@ -92,6 +92,17 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
         result.success(durationRemaining);
       }
       "startNavigation" -> {
+
+        
+
+        Toast.makeText(
+          context,
+          "This is Testong",
+          Toast.LENGTH_SHORT
+      ).show()
+
+         
+      }
         
         checkPermissionAndBeginNavigation(call, result)
       }

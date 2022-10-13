@@ -988,13 +988,6 @@ open class EmbeddedNavigationView(ctx: Context, act: Activity, bind: MapActivity
                 distanceRemaining = routeProgress.distanceRemaining.toDouble()
                 durationRemaining = routeProgress.durationRemaining
 
-                // if(distanceRemaining ==100 ){
-
-                //     // Toast.makeText(activity, "Distance is less than 100", 
-                //     // Toast.LENGTH_SHORT).show();
-
-                   
-                // }
 
 
                 Toast.makeText(
