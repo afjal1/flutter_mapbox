@@ -93,20 +93,7 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
         checkPermissionAndBeginNavigation(call, result)
       }
       "finishNavigation" -> {
-        //confirmation dialog box
-
-      //   var builder = androidx.appcompat.app.AlertDialog.Builder(currentActivity)
-      //   builder.setTitle("Exit Navigation")
-      //   builder.setMessage("Are you sure you want to exit navigation?")
-      //   builder.setPositiveButton("Yes") { dialog, which ->
-      //     FullscreenNavigationLauncher.stopNavigation(currentActivity!!)
-      //     result.success(true)
-      //   }
-      //   builder.setNegativeButton("No") { dialog, which ->
-      //     result.success(false)
-      //   }
-      //   builder.show()
-      // }
+      
      
 
 
