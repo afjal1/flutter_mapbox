@@ -197,7 +197,6 @@ class FlutterMapboxPlugin: FlutterPlugin, MethodCallHandler, EventChannel.Stream
     val builder = AlertDialog.Builder(this)
     builder.setTitle("Androidly Alert")
     builder.setMessage("We have a message")
-    //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
     
     builder.setPositiveButton(android.R.string.yes) { dialog, which ->
         Toast.makeText(applicationContext,
