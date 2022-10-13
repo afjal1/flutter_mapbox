@@ -194,19 +194,25 @@ class FullscreenNavActivity : AppCompatActivity() {
                 )
                 .build()
                
-                Toast.makeText(
-                    this@FullscreenNavActivity,
-                    "I am Here For Testing",
-                    Toast.LENGTH_SHORT
-                ).show()
-            // if(distanceRemaining <=100){
-            //     Toast.makeText(
-            //         this@FullscreenNavActivity,
-            //         "I am Here For The Distance",
-            //         Toast.LENGTH_SHORT
-            //     ).show()
-            // }
-            
+                 print("THis is Our Distance Here ${TripProgressUpdateFormatter.Builder(this)
+                 .distanceRemainingFormatter(
+                     DistanceRemainingFormatter(distanceFormatterOptions)
+                 )
+                 .timeRemainingFormatter(
+                     TimeRemainingFormatter(this)
+                 )
+                 .percentRouteTraveledFormatter(
+                     PercentDistanceTraveledFormatter()
+                 )
+                 .estimatedTimeToArrivalFormatter(
+                     EstimatedTimeToArrivalFormatter(this, TimeFormat.NONE_SPECIFIED)
+                 )
+                 .build()
+                }"
+                )
+
+               
+      
            
 
         )
